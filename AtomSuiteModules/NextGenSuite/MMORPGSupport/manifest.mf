@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: sg.atom.nextgen
+OpenIDE-Module-Localizing-Bundle: sg/atom/nextgen/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

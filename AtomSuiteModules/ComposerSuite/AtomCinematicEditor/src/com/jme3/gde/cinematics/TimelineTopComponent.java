@@ -1,0 +1,287 @@
+/*
+ *  Copyright (c) 2009-2010 jMonkeyEngine
+ *  All rights reserved.
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions are
+ *  met:
+ *
+ *  * Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ *  * Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ *  * Neither the name of 'jMonkeyEngine' nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ *  TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ *  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ *  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ *  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ *  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ *  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ *  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+package com.jme3.gde.cinematics;
+
+import com.jme3.gde.cinematics.properties.FloatPropertyEditor;
+import com.jme3.gde.cinematics.properties.Vector3fPropertyEditor;
+import com.jme3.gde.cinematics.timeline.TimelineManager;
+import com.jme3.gde.cinematics.timeline.TimelineTreeHandler;
+import com.jme3.gde.core.scene.SceneApplication;
+import com.jme3.math.Vector3f;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyEditorManager;
+import java.io.File;
+import java.io.IOException;
+import org.openide.util.NbBundle;
+import org.openide.windows.TopComponent;
+import org.netbeans.api.settings.ConvertAsProperties;
+import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
+import org.openide.awt.StatusDisplayer;
+import org.openide.cookies.SaveCookie;
+import org.openide.filesystems.FileChooserBuilder;
+import org.openide.filesystems.FileObject;
+import org.openide.filesystems.FileUtil;
+import org.openide.loaders.DataObject;
+import org.openide.util.Exceptions;
+import org.openide.util.ImageUtilities;
+import org.openide.util.lookup.InstanceContent;
+import org.openide.windows.CloneableTopComponent;
+
+/**
+ * Top component which displays something.
+ */
+@ConvertAsProperties(dtd = "-//com.jme3.gde.cinematics//Timeline//EN", autostore = false)
+public final class TimelineTopComponent extends CloneableTopComponent {
+
+    /** path to the icon used by the component and its open action */
+    static final String ICON_PATH = "com/jme3/gde/cinematics/jme-logo.png";
+    private static final String PREFERRED_ID = "TimelineTopComponent";
+    InstanceContent content;
+    Saver saver = new Saver();
+    TimelineManager manager = new TimelineManager();
+
+    public TimelineTopComponent() {
+
+        initComponents();
+        setName(NbBundle.getMessage(TimelineTopComponent.class, "CTL_TimelineTopComponent"));
+        setToolTipText(NbBundle.getMessage(TimelineTopComponent.class, "HINT_TimelineTopComponent"));
+        setIcon(ImageUtilities.loadImage(ICON_PATH, true));
+
+        jSplitPane1.addPropertyChangeListener("lastDividerLocation", new java.beans.PropertyChangeListener() {
+
+            public void propertyChange(PropertyChangeEvent evt) {
+                manager.repaintPanels();
+            }
+        });
+
+
+        manager.setBottomPanel((TimelineBottomPanel) timelineBottomPanel);
+        manager.setPanel((TimelinePanel) timelinePanel);
+        manager.setTreeHandler(new TimelineTreeHandler(timelineTree));
+
+        // TODO remove me
+        manager.populateRoot();
+
+        content = new InstanceContent();
+
+        SceneApplication.getApplication().addSceneListener(manager);
+
+        PropertyEditorManager.registerEditor(Float.class, FloatPropertyEditor.class);
+        PropertyEditorManager.registerEditor(Vector3f.class, Vector3fPropertyEditor.class);
+    }
+
+    private void enableSaveAction(boolean canSave) {
+        if (canSave) {
+            //If the canvas is modified,
+            //we add SaveCookie impl to Lookup:
+            content.add(saver);
+        } else {
+            //Otherwise, we remove the SaveCookie impl from the lookup:
+            content.remove(saver);
+        }
+    }
+
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
+     */
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        timelineTree = new javax.swing.JTree();
+        timelinePanel = new TimelinePanel();
+        timelineBottomPanel = new TimelineBottomPanel();
+
+        jScrollPane1.setBackground(new java.awt.Color(96, 96, 96));
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setViewportBorder(null);
+        jScrollPane1.setAlignmentX(0.0F);
+        jScrollPane1.setAlignmentY(0.0F);
+
+        jSplitPane1.setBackground(new java.awt.Color(96, 96, 96));
+        jSplitPane1.setBorder(null);
+
+        timelineTree.setBackground(new java.awt.Color(96, 96, 96));
+        timelineTree.setBorder(null);
+        timelineTree.setForeground(new java.awt.Color(96, 96, 96));
+        timelineTree.setPreferredSize(new java.awt.Dimension(250, 76));
+        jSplitPane1.setLeftComponent(timelineTree);
+
+        timelinePanel.setBackground(new java.awt.Color(96, 96, 96));
+        timelinePanel.setBorder(null);
+        timelinePanel.setPreferredSize(new java.awt.Dimension(200, 200));
+
+        org.jdesktop.layout.GroupLayout timelinePanelLayout = new org.jdesktop.layout.GroupLayout(timelinePanel);
+        timelinePanel.setLayout(timelinePanelLayout);
+        timelinePanelLayout.setHorizontalGroup(
+            timelinePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 358, Short.MAX_VALUE)
+        );
+        timelinePanelLayout.setVerticalGroup(
+            timelinePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 352, Short.MAX_VALUE)
+        );
+
+        jSplitPane1.setRightComponent(timelinePanel);
+
+        jScrollPane1.setViewportView(jSplitPane1);
+
+        timelineBottomPanel.setBackground(new java.awt.Color(96, 96, 96));
+        timelineBottomPanel.setBorder(null);
+        timelineBottomPanel.setPreferredSize(new java.awt.Dimension(576, 70));
+
+        org.jdesktop.layout.GroupLayout timelineBottomPanelLayout = new org.jdesktop.layout.GroupLayout(timelineBottomPanel);
+        timelineBottomPanel.setLayout(timelineBottomPanelLayout);
+        timelineBottomPanelLayout.setHorizontalGroup(
+            timelineBottomPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 614, Short.MAX_VALUE)
+        );
+        timelineBottomPanelLayout.setVerticalGroup(
+            timelineBottomPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 70, Short.MAX_VALUE)
+        );
+
+        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(timelineBottomPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+            .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
+                .add(0, 0, 0)
+                .add(timelineBottomPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        );
+    }// </editor-fold>//GEN-END:initComponents
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JPanel timelineBottomPanel;
+    private javax.swing.JPanel timelinePanel;
+    private javax.swing.JTree timelineTree;
+    // End of variables declaration//GEN-END:variables
+
+    @Override
+    public int getPersistenceType() {
+        return TopComponent.PERSISTENCE_ALWAYS;
+    }
+
+    @Override
+    public void componentOpened() {
+        // TODO add custom code on component opening
+    }
+
+    @Override
+    public void componentClosed() {
+        // TODO add custom code on component closing
+    }
+
+    void writeProperties(java.util.Properties p) {
+        // better to version settings since initial version as advocated at
+        // http://wiki.apidesign.org/wiki/PropertyFiles
+        p.setProperty("version", "1.0");
+        // TODO store your settings
+    }
+
+    Object readProperties(java.util.Properties p) {
+        return null;
+    }
+
+    @Override
+    protected String preferredID() {
+        return PREFERRED_ID;
+    }
+
+    private class Saver implements SaveCookie {
+
+        @Override
+        public void save() throws IOException {
+            DataObject theFile = getLookup().lookup(DataObject.class);
+            if (theFile != null) {
+                File saveTo = FileUtil.toFile(theFile.getPrimaryFile());
+                save(saveTo);
+            } else {
+                saveAs();
+            }
+        }
+
+        public void saveAs() throws IOException {
+            String title = NbBundle.getMessage(Saver.class, "TTL_SAVE_DIALOG");
+            File f = new FileChooserBuilder(Saver.class).setTitle(title).showSaveDialog();
+            if (f != null) {
+                if (!f.getAbsolutePath().endsWith(".png")) {
+                    f = new File(f.getAbsolutePath() + ".png");
+                }
+                try {
+                    if (!f.exists()) {
+                        if (!f.createNewFile()) {
+                            String failMsg = NbBundle.getMessage(TimelineTopComponent.class, "MSG_SaveFailed", f.getName());
+                            DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(failMsg));
+                            return;
+                        }
+                    } else {
+                        String overwriteMessage = NbBundle.getMessage(Saver.class, "MSG_Overwrite", f.getName());
+                        Object userChose = DialogDisplayer.getDefault().notify(new NotifyDescriptor.Confirmation(overwriteMessage));
+                        if (NotifyDescriptor.CANCEL_OPTION.equals(userChose)) {
+                            return;
+                        }
+                    }
+                    //Need getAbsoluteFile(), or X.png and x.png are different on windows
+                    save(f.getAbsoluteFile());
+                } catch (IOException ioe) {
+                    Exceptions.printStackTrace(ioe);
+                }
+            }
+        }
+
+        private void save(File f) throws IOException {
+            //TODO ImageIO.write(canvas.getImage(), "png", f); output xml
+
+            String savedMessage = NbBundle.getMessage(Saver.class, "MSG_Saved", f.getName());
+            StatusDisplayer.getDefault().setStatusText(savedMessage);
+            FileObject fob = FileUtil.toFileObject(FileUtil.normalizeFile(f));
+            assert fob != null;
+            //Store the file, so we don't show the Save dialog again
+            content.add(DataObject.find(fob));
+            setDisplayName(fob.getName());
+            enableSaveAction(false);
+        }
+    }
+}

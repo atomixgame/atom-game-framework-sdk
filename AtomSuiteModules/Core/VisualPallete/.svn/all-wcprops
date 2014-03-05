@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/nb-api-samples~api-samples/!svn/ver/152/versions/7.1/tutorials/ShapeSample
+END
+manifest.mf
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/nb-api-samples~api-samples/!svn/ver/151/versions/7.1/tutorials/ShapeSample/manifest.mf
+END
+build.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/nb-api-samples~api-samples/!svn/ver/151/versions/7.1/tutorials/ShapeSample/build.xml
+END

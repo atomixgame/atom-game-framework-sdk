@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module: sg.gde.atomcore
+OpenIDE-Module-Layer: sg/gde/atomcore/layer.xml
+OpenIDE-Module-Localizing-Bundle: sg/gde/atomcore/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

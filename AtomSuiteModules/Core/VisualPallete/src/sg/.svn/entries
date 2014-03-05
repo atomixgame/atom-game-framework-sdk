@@ -1,0 +1,28 @@
+10
+
+dir
+0
+https://svn.java.net/svn/nb-api-samples~api-samples/versions/7.1/tutorials/ShapeSample/src/sg
+https://svn.java.net/svn/nb-api-samples~api-samples
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+b93c4c73-5627-6eec-fd77-d3add3514008
+

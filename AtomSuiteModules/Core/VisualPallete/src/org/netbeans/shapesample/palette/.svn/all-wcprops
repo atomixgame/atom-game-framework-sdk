@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/nb-api-samples~api-samples/!svn/ver/152/versions/7.1/tutorials/ShapeSample/src/org/netbeans/shapesample/palette
+END
+Shape.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/nb-api-samples~api-samples/!svn/ver/152/versions/7.1/tutorials/ShapeSample/src/org/netbeans/shapesample/palette/Shape.java
+END
+image1.png
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/nb-api-samples~api-samples/!svn/ver/151/versions/7.1/tutorials/ShapeSample/src/org/netbeans/shapesample/palette/image1.png
+END
+image2.png
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/nb-api-samples~api-samples/!svn/ver/151/versions/7.1/tutorials/ShapeSample/src/org/netbeans/shapesample/palette/image2.png
+END
+image3.png
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/nb-api-samples~api-samples/!svn/ver/151/versions/7.1/tutorials/ShapeSample/src/org/netbeans/shapesample/palette/image3.png
+END
+CategoryChildFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/nb-api-samples~api-samples/!svn/ver/152/versions/7.1/tutorials/ShapeSample/src/org/netbeans/shapesample/palette/CategoryChildFactory.java
+END
+PaletteSupport.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/nb-api-samples~api-samples/!svn/ver/152/versions/7.1/tutorials/ShapeSample/src/org/netbeans/shapesample/palette/PaletteSupport.java
+END
+ShapeChildFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/nb-api-samples~api-samples/!svn/ver/152/versions/7.1/tutorials/ShapeSample/src/org/netbeans/shapesample/palette/ShapeChildFactory.java
+END
+Category.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/nb-api-samples~api-samples/!svn/ver/152/versions/7.1/tutorials/ShapeSample/src/org/netbeans/shapesample/palette/Category.java
+END

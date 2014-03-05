@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: sg.atom.ai.editor
+OpenIDE-Module-Localizing-Bundle: sg/atom/ai/editor/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

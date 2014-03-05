@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.1//EN" "http://www.netbeans.org/dtds/filesystem-1_1.dtd">
+<filesystem>
+    <folder name="Actions">
+        <folder name="Build">
+            <file name="org-myorg-myeditor-OpenEditorAction.instance"/>
+        </folder>
+    </folder>
+    <folder name="Menu">
+        <folder name="File">
+            <attr name="org-myorg-myeditor-OpenEditorAction.shadow/org-netbeans-modules-project-ui-NewProject.shadow" boolvalue="true"/>
+            <file name="org-myorg-myeditor-OpenEditorAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Build/org-myorg-myeditor-OpenEditorAction.instance"/>
+            </file>
+        </folder>
+    </folder>
+</filesystem>

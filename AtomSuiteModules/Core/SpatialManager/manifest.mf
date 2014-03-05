@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module: org.MyTool.LayerManager
+OpenIDE-Module-Layer: org/MyTool/LayerManager/layer.xml
+OpenIDE-Module-Localizing-Bundle: org/MyTool/LayerManager/Bundle.properties
+OpenIDE-Module-Requires: org.openide.windows.WindowManager
+OpenIDE-Module-Specification-Version: 1.0
+

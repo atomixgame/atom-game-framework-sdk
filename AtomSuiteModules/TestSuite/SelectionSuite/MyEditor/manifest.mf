@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+OpenIDE-Module: org.myorg.myeditor
+OpenIDE-Module-Install: org/myorg/myeditor/Installer.class
+OpenIDE-Module-Layer: org/myorg/myeditor/layer.xml
+OpenIDE-Module-Localizing-Bundle: org/myorg/myeditor/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

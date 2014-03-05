@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: groovy.libs
+OpenIDE-Module-Localizing-Bundle: groovy/libs/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

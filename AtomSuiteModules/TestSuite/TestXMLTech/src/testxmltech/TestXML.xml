@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : TestXML.xml
+    Created on : August 25, 2011, 6:14 PM
+    Author     : hungcuong
+    Description:
+        Purpose of the document follows.
+-->
+
+<root>
+<!--Just a thought-->
+<child name="value">Filler, ... I could have had a FOO!</child>
+</root>
