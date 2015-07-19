@@ -15,7 +15,6 @@ import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
 import sg.gde.ScriptManager.control.NetbeanGroovyScriptEngine;
 import sg.gde.ScriptManager.view.ScriptBaseTopComponent;
-import sg.gde.atomcore.notify.NotifyUtil;
 
 /**
  * Top component which displays something.
@@ -536,7 +535,7 @@ private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         if (checkOpenedProject()) {
             startScriptEngineInProject();
         } else {
-            NotifyUtil.warn("title", "Can not find .Script folder ", false);
+            
         }
     }//GEN-LAST:event_btnStartActionPerformed
 

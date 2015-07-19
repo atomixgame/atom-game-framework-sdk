@@ -41,6 +41,7 @@ public class GanttTreeTable extends JXTreeTable implements ActionListener {
         super(treeModel);
         setDefaultRenderer(GanttBar.class, ganttRenderer);
         setDefaultEditor(Date.class, dateEditor);
+        setRowHeight(60);
     }
 
     /**
@@ -91,7 +92,7 @@ public class GanttTreeTable extends JXTreeTable implements ActionListener {
         TreePath selectedPath = getPathForRow(getSelectedRow());
         if (selectedPath != null) {
             DefaultMutableTreeTableNode selectedNode = (DefaultMutableTreeTableNode) selectedPath.getLastPathComponent();
-            if (selectedNode.getParent()!=null) {
+            if (selectedNode.getParent() != null) {
                 ActivityTreeTableModel model = (ActivityTreeTableModel) getTreeTableModel();
                 model.removeNodeFromParent(selectedNode);
             }

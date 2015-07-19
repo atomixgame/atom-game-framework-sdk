@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-OpenIDE-Module: sg.atom.nextgen.facialeditor
-OpenIDE-Module-Localizing-Bundle: sg/atom/nextgen/facialeditor/Bundle.properties
+OpenIDE-Module: sg.gde.rpg.facial
+OpenIDE-Module-Localizing-Bundle: sg/gde/rpg/facial/Bundle.properties
 OpenIDE-Module-Specification-Version: 1.0
 

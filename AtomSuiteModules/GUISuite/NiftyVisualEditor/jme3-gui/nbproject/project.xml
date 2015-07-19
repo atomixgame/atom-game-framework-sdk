@@ -4,7 +4,7 @@
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/nb-module-project/3">
             <code-name-base>com.jme3.gde.gui</code-name-base>
-            <suite-component/>
+            <standalone/>
             <module-dependencies>
                 <dependency>
                     <code-name-base>com.jme3.gde.core</code-name-base>
@@ -232,8 +232,6 @@
             </module-dependencies>
             <public-packages>
                 <package>com.jme3.gde.gui.explorer</package>
-                <package>com.jme3.gde.gui.explorer.node</package>
-                <package>com.jme3.gde.gui.file.controlfile</package>
                 <package>com.jme3.gde.gui.file.niftyfile</package>
                 <package>com.jme3.gde.gui.io.asset</package>
                 <package>com.jme3.gde.gui.io.gen.swing</package>
@@ -241,61 +239,45 @@
                 <package>com.jme3.gde.gui.io.xml</package>
                 <package>com.jme3.gde.gui.multiview</package>
                 <package>com.jme3.gde.gui.multiview.event</package>
-                <package>com.jme3.gde.gui.multiview.input</package>
-                <package>com.jme3.gde.gui.multiview.java2d</package>
-                <package>com.jme3.gde.gui.multiview.jme</package>
-                <package>com.jme3.gde.gui.nbeditor.about</package>
                 <package>com.jme3.gde.gui.nbeditor.actions.base</package>
                 <package>com.jme3.gde.gui.nbeditor.actions.element</package>
                 <package>com.jme3.gde.gui.nbeditor.actions.global</package>
                 <package>com.jme3.gde.gui.nbeditor.actions.history</package>
                 <package>com.jme3.gde.gui.nbeditor.controller</package>
                 <package>com.jme3.gde.gui.nbeditor.controller.selection</package>
-                <package>com.jme3.gde.gui.nbeditor.editors</package>
-                <package>com.jme3.gde.gui.nbeditor.event</package>
-                <package>com.jme3.gde.gui.nbeditor.model</package>
-                <package>com.jme3.gde.gui.nbeditor.model.elements</package>
-                <package>com.jme3.gde.gui.nbeditor.model.exception</package>
-                <package>com.jme3.gde.gui.nbeditor.niftygui.style</package>
-                <package>com.jme3.gde.gui.nbeditor.renderUtil</package>
                 <package>com.jme3.gde.gui.options</package>
-                <package>com.jme3.gde.gui.palette.text</package>
-                <package>com.jme3.gde.gui.palette.visual</package>
-                <package>com.jme3.gde.gui.palette.visual.dnd</package>
-                <package>com.jme3.gde.gui.palette.visual.palettecomponents</package>
-                <package>com.jme3.gde.gui.testbed</package>
-                <package>com.jme3.gde.gui.testbed.mock</package>
-                <package>com.jme3.gde.gui.testbed.wire</package>
-                <package>com.jme3.gde.gui.testbed.wire.editor</package>
-                <package>com.jme3.gde.gui.testbed.wire.palette</package>
             </public-packages>
             <class-path-extension>
-                <runtime-relative-path>ext/xsom-20110101-SNAPSHOT.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/xsom-20110101-SNAPSHOT.jar</binary-origin>
+                <runtime-relative-path>ext/javax.inject.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/javax.inject.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
-                <runtime-relative-path>ext/nifty-1.3.3-SNAPSHOT.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/nifty-1.3.3-SNAPSHOT.jar</binary-origin>
+                <runtime-relative-path>ext/guava-16.0.1.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/guava-16.0.1.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
-                <runtime-relative-path>ext/nifty-java2d-renderer-1.3.1.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/nifty-java2d-renderer-1.3.1.jar</binary-origin>
+                <runtime-relative-path>ext/guice-assistedinject-3.0.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/guice-assistedinject-3.0.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
-                <runtime-relative-path>ext/eventbus.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/eventbus.jar</binary-origin>
+                <runtime-relative-path>ext/guice-3.0.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/guice-3.0.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
-                <runtime-relative-path>ext/nifty-default-controls-1.3.2.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/nifty-default-controls-1.3.2.jar</binary-origin>
+                <runtime-relative-path>ext/guice-multibindings-3.0.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/guice-multibindings-3.0.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
-                <runtime-relative-path>ext/relaxngDatatype-1.5.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/relaxngDatatype-1.5.jar</binary-origin>
+                <runtime-relative-path>ext/orika-core-1.4.6-20140401.134904-3.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/orika-core-1.4.6-20140401.134904-3.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
-                <runtime-relative-path>ext/xpp3-1.1.4c.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/xpp3-1.1.4c.jar</binary-origin>
+                <runtime-relative-path>ext/nifty-java2d-renderer-1.4.0-SNAPSHOT.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/nifty-java2d-renderer-1.4.0-SNAPSHOT.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/BetterBeansBinding-1.2.2.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/BetterBeansBinding-1.2.2.jar</binary-origin>
             </class-path-extension>
         </data>
     </configuration>

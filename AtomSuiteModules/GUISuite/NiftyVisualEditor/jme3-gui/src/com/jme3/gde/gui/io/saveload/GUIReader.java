@@ -14,12 +14,11 @@
  */
 package com.jme3.gde.gui.io.saveload;
 
-import com.jme3.gde.gui.nbeditor.model.Types;
-import de.lessvoid.nifty.Nifty;
-import com.jme3.gde.gui.nbeditor.model.GUI;
-import com.jme3.gde.gui.nbeditor.model.GUIFactory;
-import com.jme3.gde.gui.nbeditor.model.elements.GElement;
-import com.jme3.gde.gui.nbeditor.model.exception.NoProductException;
+import com.jme3.gde.gui.base.model.AbstractGUI;
+import com.jme3.gde.gui.base.model.GUITypes;
+import com.jme3.gde.gui.base.model.GUIFactory;
+import com.jme3.gde.gui.base.model.elements.GElement;
+import com.jme3.gde.gui.base.model.exception.NoProductException;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
@@ -46,22 +45,24 @@ import org.xml.sax.SAXParseException;
  */
 public class GUIReader implements ErrorHandler {
 
-    private Nifty loader;
+    private Object guiService;
     private Set<String> errors;
+    private final GUIFactory guiFactory;
 
-    public GUIReader(Nifty loader) {
-        this.loader = loader;
+    public GUIReader(GUIFactory factory) {
+        this.guiFactory = factory;
+        this.guiService = factory.getService();
         this.errors = new HashSet<String>();
     }
 
-    public GUI readGUI(File f) throws ParserConfigurationException, IOException, SAXException, NoProductException {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
+    public AbstractGUI readGUI(File f) throws ParserConfigurationException, IOException, SAXException, NoProductException {
+        DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = domFactory.newDocumentBuilder();
         Document document = builder.parse(f);
-        GUI result = GUIFactory.getInstance().createGUI(loader, document);
+        AbstractGUI result = guiFactory.createGUI(guiService, document);
         Element root = (Element) document.getElementsByTagName("nifty").item(0);
 
-        NodeList screens = root.getElementsByTagName(Types.SCREEN.toString());
+        NodeList screens = root.getElementsByTagName(GUITypes.SCREEN.toString());
         Logger.getLogger(GUIReader.class.getName()).log(Level.INFO, "Screens num:" + screens.getLength());
 
         for (int i = 0; i < screens.getLength(); i++) {
@@ -77,9 +78,9 @@ public class GUIReader implements ErrorHandler {
         return result;
     }
 
-    private void addRecursiveChild(Element element, GElement parent, GUI gui) throws NoProductException {
+    private void addRecursiveChild(Element element, GElement parent, AbstractGUI gui) throws NoProductException {
 
-        GElement Gchild = GUIFactory.getInstance().createGElement(element);
+        GElement Gchild = guiFactory.createGElement(element);
         gui.addElementToParent(Gchild, parent);
 
         // Continue down

@@ -5,7 +5,7 @@
 package com.jme3.gde.gui.file.niftyfile;
 
 import com.jme3.gde.core.assets.ProjectAssetManager;
-import com.jme3.gde.gui.multiview.java2d.J2DPreviewViewDesc;
+import com.jme3.gde.gui.services.niftygui.java2d.J2DPreviewViewDesc;
 import com.jme3.gde.gui.nbeditor.controller.GUIEditor;
 import java.io.IOException;
 import org.netbeans.api.project.Project;

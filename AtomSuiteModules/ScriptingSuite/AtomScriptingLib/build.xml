@@ -5,7 +5,7 @@
 <project name="sg.atom.libs.scripting" default="netbeans" basedir=".">
     <description>Builds, tests, and runs the project sg.atom.libs.scripting.</description>
     <import file="nbproject/build-impl.xml"/>
-    <property name="original.project.dir" value="../../../MY GAMES/AtomScripting"/>
+    <property name="original.project.dir" value="../../../../AtomScripting"/>
     <property name="original.project.jar"
               value="${original.project.dir}/dist/AtomScripting.jar"/>
 

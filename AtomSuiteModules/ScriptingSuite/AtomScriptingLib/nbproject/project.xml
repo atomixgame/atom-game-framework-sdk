@@ -6,23 +6,10 @@
             <code-name-base>sg.atom.libs.scripting</code-name-base>
             <suite-component/>
             <module-dependencies/>
-            <public-packages>
-                <package>script.groovy.play2d</package>
-                <package>script.groovy.play3d</package>
-                <package>sg.atom.script.engine</package>
-                <package>sg.atom.script.engine.groovy</package>
-                <package>sg.atom.script.engine.groovy.gamecore</package>
-                <package>sg.atom.script.engine.groovy.gameplay</package>
-                <package>sg.atom.script.gamecore</package>
-                <package>sg.atom.script.ui</package>
-                <package>sg.testbed.game2d</package>
-                <package>sg.testbed.game2d.graphics</package>
-                <package>sg.testbed.game3d</package>
-                <package>sg.testbed.ui</package>
-            </public-packages>
+            <public-packages/>
             <class-path-extension>
                 <runtime-relative-path>ext/AtomScripting.jar</runtime-relative-path>
-                <binary-origin>../../../MY GAMES/AtomScripting/dist/AtomScripting.jar</binary-origin>
+                <binary-origin>release/modules/ext/AtomScripting.jar</binary-origin>
             </class-path-extension>
         </data>
     </configuration>

@@ -14,6 +14,7 @@
                 <package>groovy.io</package>
                 <package>groovy.jmx.builder</package>
                 <package>groovy.json</package>
+                <package>groovy.json.internal</package>
                 <package>groovy.lang</package>
                 <package>groovy.mock.interceptor</package>
                 <package>groovy.model</package>
@@ -26,8 +27,11 @@
                 <package>groovy.swing.impl</package>
                 <package>groovy.test</package>
                 <package>groovy.text</package>
+                <package>groovy.text.markup</package>
                 <package>groovy.time</package>
                 <package>groovy.transform</package>
+                <package>groovy.transform.builder</package>
+                <package>groovy.transform.stc</package>
                 <package>groovy.ui</package>
                 <package>groovy.ui.text</package>
                 <package>groovy.ui.view</package>
@@ -70,6 +74,7 @@
                 <package>org.codehaus.groovy.bsf</package>
                 <package>org.codehaus.groovy.classgen</package>
                 <package>org.codehaus.groovy.classgen.asm</package>
+                <package>org.codehaus.groovy.classgen.asm.indy</package>
                 <package>org.codehaus.groovy.classgen.asm.sc</package>
                 <package>org.codehaus.groovy.cli</package>
                 <package>org.codehaus.groovy.control</package>
@@ -81,7 +86,9 @@
                 <package>org.codehaus.groovy.jsr223</package>
                 <package>org.codehaus.groovy.plugin</package>
                 <package>org.codehaus.groovy.reflection</package>
+                <package>org.codehaus.groovy.reflection.android</package>
                 <package>org.codehaus.groovy.reflection.stdclasses</package>
+                <package>org.codehaus.groovy.reflection.v7</package>
                 <package>org.codehaus.groovy.runtime</package>
                 <package>org.codehaus.groovy.runtime.callsite</package>
                 <package>org.codehaus.groovy.runtime.dgmimpl</package>
@@ -102,20 +109,24 @@
                 <package>org.codehaus.groovy.tools.javac</package>
                 <package>org.codehaus.groovy.tools.shell</package>
                 <package>org.codehaus.groovy.tools.shell.commands</package>
+                <package>org.codehaus.groovy.tools.shell.completion</package>
                 <package>org.codehaus.groovy.tools.shell.util</package>
                 <package>org.codehaus.groovy.tools.xml</package>
                 <package>org.codehaus.groovy.transform</package>
                 <package>org.codehaus.groovy.transform.sc</package>
                 <package>org.codehaus.groovy.transform.sc.transformers</package>
                 <package>org.codehaus.groovy.transform.stc</package>
+                <package>org.codehaus.groovy.transform.tailrec</package>
+                <package>org.codehaus.groovy.transform.trait</package>
                 <package>org.codehaus.groovy.util</package>
                 <package>org.codehaus.groovy.vmplugin</package>
                 <package>org.codehaus.groovy.vmplugin.v5</package>
                 <package>org.codehaus.groovy.vmplugin.v6</package>
+                <package>org.codehaus.groovy.vmplugin.v7</package>
             </public-packages>
             <class-path-extension>
-                <runtime-relative-path>ext/groovy-all-2.1.3.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/groovy-all-2.1.3.jar</binary-origin>
+                <runtime-relative-path>ext/groovy-all-2.4.3.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/groovy-all-2.4.3.jar</binary-origin>
             </class-path-extension>
         </data>
     </configuration>

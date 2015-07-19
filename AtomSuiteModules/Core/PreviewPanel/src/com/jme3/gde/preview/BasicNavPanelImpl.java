@@ -1,6 +1,6 @@
 package com.jme3.gde.preview;
 
-import com.jme3.gde.psdhelper.PSDReader;
+import com.jme3.gde.assets.fileformat.psd.PSDReader;
 import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -42,7 +42,9 @@ public class BasicNavPanelImpl implements NavigatorPanel {
     private LookupListener contextL;
     private ImageDrawPanel imagePanel = new ImageDrawPanel();
 
-    /** public no arg constructor needed for system to instantiate provider well */
+    /**
+     * public no arg constructor needed for system to instantiate provider well
+     */
     public BasicNavPanelImpl() {
     }
 
@@ -88,8 +90,10 @@ public class BasicNavPanelImpl implements NavigatorPanel {
     private static final RequestProcessor RP = new RequestProcessor(BasicNavPanelImpl.class);
     String type = "";
     BufferedImage image;
-    
-    /************* non - public part ************/
+
+    /**
+     * *********** non - public part ***********
+     */
     private void setNewContent(Collection newData) {
         // put your code here that grabs information you need from given
         // collection of data, recompute UI of your panel and show it.
@@ -104,7 +108,7 @@ public class BasicNavPanelImpl implements NavigatorPanel {
 
 
             String fileExt = file.getExt();
-            
+
 
             /*
              * Make reasonably sure we have an image format that AWT can
@@ -124,14 +128,13 @@ public class BasicNavPanelImpl implements NavigatorPanel {
 
             if (file != null) {
                 RP.post(new Runnable() {
-
                     @Override
                     public void run() {
                         try {
-                            if (type.equals("normal")){
+                            if (type.equals("normal")) {
                                 image = ImageIO.read(file.getInputStream());
                                 System.out.println("normal case !");
-                            } else if (type.equals("psd")){
+                            } else if (type.equals("psd")) {
                                 PSDReader r = new PSDReader();
                                 r.read(file.getInputStream());
                                 image = r.allFrame();
@@ -151,7 +154,9 @@ public class BasicNavPanelImpl implements NavigatorPanel {
 
     }
 
-    /** Accessor for listener to context */
+    /**
+     * Accessor for listener to context
+     */
     private LookupListener getContextListener() {
         if (contextL == null) {
             contextL = new ContextListener();
@@ -159,7 +164,9 @@ public class BasicNavPanelImpl implements NavigatorPanel {
         return contextL;
     }
 
-    /** Listens to changes of context and triggers proper action */
+    /**
+     * Listens to changes of context and triggers proper action
+     */
     private class ContextListener implements LookupListener {
 
         public void resultChanged(LookupEvent ev) {

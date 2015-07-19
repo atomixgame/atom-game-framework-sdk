@@ -1,26 +1,5 @@
-/*
- *  File: LineChartExample.java 
- *  Copyright (c) 2004-2008  Peter Kliem (Peter.Kliem@jaret.de)
- *  A commercial license is available, see http://www.jaret.de.
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
 package de.jaret.timebars.linechart;
 
-import sg.atom.timeline.model.cine.LineChartInterval;
-import sg.atom.timeline.model.cine.creator.DataPointModelCreator;
 import de.jaret.timebars.linechart.renderer.LineChartHeaderRenderer;
 import de.jaret.timebars.linechart.renderer.LineChartRenderer;
 import de.jaret.util.ui.timebars.TimeBarViewerDelegate;
@@ -31,11 +10,12 @@ import de.jaret.util.ui.timebars.model.TimeBarRow;
 import de.jaret.util.ui.timebars.swing.TimeBarViewer;
 import de.jaret.util.ui.timebars.swing.renderer.BoxTimeScaleRenderer;
 import java.awt.BorderLayout;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import sg.atom.swing.components.jaret.JaretLineChartInterval;
+import sg.atom.swing.components.jaret.creator.JaretDataPointModelCreator;
 
 /**
  * Example showing how to draw a simple line chart with the time bars. This is showing one line chart only, but mixing
@@ -61,7 +41,7 @@ public class LineChartExample extends JFrame {
         BorderLayout layout = new BorderLayout();
         parent.setLayout(layout);
 
-        TimeBarModel model = DataPointModelCreator.createModel();
+        TimeBarModel model = JaretDataPointModelCreator.createModel();
 
         // create the time bar viewer
         // horizontal scroll bar only! (since we only assume on erow, height of the
@@ -108,7 +88,7 @@ public class LineChartExample extends JFrame {
 
 
         // register the renderer for the line chart itself
-        _tbv.registerTimeBarRenderer(LineChartInterval.class, new LineChartRenderer());
+        _tbv.registerTimeBarRenderer(JaretLineChartInterval.class, new LineChartRenderer());
 
         // add the control panel for a scale slider
         LineChartControlPanel ctrlPanel = new LineChartControlPanel(_tbv);

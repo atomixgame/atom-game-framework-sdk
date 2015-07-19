@@ -1,6 +1,5 @@
 package sg.gde.ScriptManager.control;
 
-import groovy.inspect.swingui.ObjectBrowser;
 import groovy.lang.Binding;
 import groovy.lang.GroovyClassLoader;
 import groovy.lang.GroovyObject;
@@ -20,8 +19,6 @@ import org.openide.util.Exceptions;
 import org.openide.windows.IOProvider;
 import org.openide.windows.InputOutput;
 import sg.atom.script.engine.groovy.AtomGroovyScriptEngine;
-import sg.gde.atomcore.notify.MessageUtil;
-import sg.gde.atomcore.notify.NotifyUtil;
 
 /**
  *
@@ -53,7 +50,7 @@ public class NetbeanGroovyScriptEngine extends AtomGroovyScriptEngine {
             io.getOut().println("Start Script Engine in" + path);
             swingBuilder = new SwingBuilder();
         } catch (IOException ex) {
-            NotifyUtil.warn("title", "Error when load Engine", false);
+            //NotifyUtil.warn("title", "Error when load Engine", false);
         }
     }
     /*
@@ -93,7 +90,7 @@ public class NetbeanGroovyScriptEngine extends AtomGroovyScriptEngine {
                 binding.setVariable("__sdk", new SDKHelper());
                 Script groovyScriptObject = scriptEngine.createScript(scriptName, binding);
                 //ObjectBrowser.inspect(groovyScriptObject);
-                
+
                 //MessageUtil.warn("Created a script:" + groovyScriptObject.toString());
                 logger.info(groovyScriptObject.getBinding().toString());
                 return (JPanel) groovyScriptObject.invokeMethod("onGUI", args);
@@ -101,24 +98,24 @@ public class NetbeanGroovyScriptEngine extends AtomGroovyScriptEngine {
 
         } catch (ResourceException ex) {
             Exceptions.printStackTrace(ex);
-            NotifyUtil.warn("Error", "Error when load Engine :" + ex.getMessage(), false);
+            //NotifyUtil.warn("Error", "Error when load Engine :" + ex.getMessage(), false);
         } catch (ScriptException ex) {
             Exceptions.printStackTrace(ex);
-            NotifyUtil.warn("Error", "Error when load Engine :" + ex.getMessage(), false);
+            //NotifyUtil.warn("Error", "Error when load Engine :" + ex.getMessage(), false);
         } catch (CompilationFailedException ex) {
             Exceptions.printStackTrace(ex);
-            NotifyUtil.warn("Error", "Error when load Engine :" + ex.getMessage(), false);
+            //NotifyUtil.warn("Error", "Error when load Engine :" + ex.getMessage(), false);
         } catch (IOException ex) {
             InputOutput io = IOProvider.getDefault().getIO("Script Engine", true);
             io.getOut().println("Error: Can not find script :" + ex.getMessage());
             Exceptions.printStackTrace(ex);
-            NotifyUtil.warn("Error", "Error when load Engine :" + ex.getMessage(), false);
+            //NotifyUtil.warn("Error", "Error when load Engine :" + ex.getMessage(), false);
         } catch (InstantiationException ex) {
             Exceptions.printStackTrace(ex);
-            NotifyUtil.warn("Error", "Error when load Engine :" + ex.getMessage(), false);
+            //NotifyUtil.warn("Error", "Error when load Engine :" + ex.getMessage(), false);
         } catch (IllegalAccessException ex) {
             Exceptions.printStackTrace(ex);
-            NotifyUtil.warn("Error", "Error when load Engine :" + ex.getMessage(), false);
+            //NotifyUtil.warn("Error", "Error when load Engine :" + ex.getMessage(), false);
         }
         return null;
     }

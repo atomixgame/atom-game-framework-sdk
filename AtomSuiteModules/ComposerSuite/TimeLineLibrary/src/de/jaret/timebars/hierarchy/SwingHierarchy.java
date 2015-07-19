@@ -1,29 +1,12 @@
-/*
- *  File: SwingHierarchy.java 
- *  Copyright (c) 2004-2007  Peter Kliem (Peter.Kliem@jaret.de)
- *  A commercial license is available, see http://www.jaret.de.
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
 package de.jaret.timebars.hierarchy;
 
+import com.jme3.timeline.components.renderer.JMECineHierarchyRenderer;
+import com.jme3.timeline.components.renderer.JMECineTitleRenderer;
+import com.jme3.timeline.components.renderer.JMEHeaderRenderer;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
-import sg.atom.timeline.model.cine.creator.RandomDemoModelCreator;
 import de.jaret.timebars.pdi.ControlPanel1;
 import de.jaret.util.date.JaretDate;
 import de.jaret.util.ui.timebars.TimeBarMarkerImpl;
@@ -32,9 +15,8 @@ import de.jaret.util.ui.timebars.model.AddingTimeBarRowModel;
 import de.jaret.util.ui.timebars.model.HierarchicalTimeBarModel;
 import de.jaret.util.ui.timebars.model.TimeBarNode;
 import de.jaret.util.ui.timebars.swing.TimeBarViewer;
-import de.jaret.util.ui.timebars.swing.renderer.DefaultHierarchyRenderer;
 import de.jaret.util.ui.timebars.swing.renderer.DefaultRelationRenderer;
-import de.jaret.util.ui.timebars.swing.renderer.DefaultTitleRenderer;
+import sg.atom.swing.components.jaret.creator.RandomDemoModelCreator;
 
 /**
  * Simple hierarchical view Swing version. Scaling, manipulating the intervals, tree structure, draggable marker.
@@ -58,7 +40,9 @@ public class SwingHierarchy {
         _tbv.setName("Hierarchy");
         _tbv.setModel(model);
         _tbv.setTimeScalePosition(TimeBarViewer.TIMESCALE_POSITION_TOP);
-        _tbv.setHierarchyRenderer(new DefaultHierarchyRenderer());
+        
+        _tbv.setHierarchyRenderer(new JMECineHierarchyRenderer());
+        _tbv.setHeaderRenderer(new JMEHeaderRenderer());
         _tbv.setHierarchyWidth(100);
         _tbv.setYAxisWidth(100);
         // allow all interval modifications
@@ -68,7 +52,8 @@ public class SwingHierarchy {
         _tbv.registerTimeBarRenderer(AddingTimeBarRowModel.MergedInterval.class, new SumRenderer());
 
         // set the default title renderer
-        _tbv.setTitleRenderer(new DefaultTitleRenderer());
+        //FIXME: Include icons
+        _tbv.setTitleRenderer(new JMECineTitleRenderer());
 
         // setup relation rendering
         _tbv.setRelationRenderer(new DefaultRelationRenderer());

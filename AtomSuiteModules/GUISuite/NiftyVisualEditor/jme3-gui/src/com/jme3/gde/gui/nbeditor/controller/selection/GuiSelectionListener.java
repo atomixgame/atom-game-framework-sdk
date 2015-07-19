@@ -14,16 +14,19 @@
  */
 package com.jme3.gde.gui.nbeditor.controller.selection;
 
-import com.jme3.gde.gui.multiview.java2d.J2DNiftyView;
+import com.jme3.gde.gui.base.model.AbstractGUI;
+import com.jme3.gde.gui.services.niftygui.java2d.J2DNiftyView;
 import com.jme3.gde.gui.nbeditor.controller.GUIEditor;
-import com.jme3.gde.gui.nbeditor.event.SimpleNiftyEditorEvent;
+import com.jme3.gde.gui.services.niftygui.events.SimpleNiftyEditorEvent;
+import com.jme3.gde.gui.services.niftygui.NiftyGUI;
 import de.lessvoid.nifty.layout.align.HorizontalAlign;
 import de.lessvoid.nifty.layout.align.VerticalAlign;
-import com.jme3.gde.gui.nbeditor.model.Types;
-import com.jme3.gde.gui.nbeditor.model.elements.GElement;
+import com.jme3.gde.gui.base.model.GUITypes;
+import com.jme3.gde.gui.base.model.elements.GElement;
+import com.jme3.gde.gui.base.model.elements.GScreen;
+import de.lessvoid.nifty.elements.Element;
 import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,6 +34,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Observable;
 import java.util.Observer;
@@ -49,7 +53,7 @@ import org.openide.util.Utilities;
  *
  * @author cris
  */
-public class GuiSelectionListener extends MouseAdapter implements ActionListener, Observer, KeyListener {
+public class GUISelectionListener extends MouseAdapter implements ActionListener, Observer, KeyListener {
 
     private final byte DIR_N = 0;
     private final byte DIR_E = 1;
@@ -72,14 +76,18 @@ public class GuiSelectionListener extends MouseAdapter implements ActionListener
     private boolean dragging;
     // Netbean bridge 
     private Lookup.Result globalLookUpResult = Utilities.actionsGlobalContext().lookupResult(GElement.class);
+    //Suggest & Snap
+    ArrayList<Integer> suggestedValue;
+    Element dummyElement;
+    Rectangle dummyRect;
 
-    public GuiSelectionListener(GUIEditor currentGUI) {
+    public GUISelectionListener(GUIEditor currentGUI) {
         this.guiEditor = currentGUI;
         enable = true;
         setupNetbeanSelection();
     }
 
-    public GuiSelectionListener(GUIEditor currentGUI, JPopupMenu po, J2DNiftyView view) {
+    public GUISelectionListener(GUIEditor currentGUI, JPopupMenu po, J2DNiftyView view) {
         this.guiEditor = currentGUI;
         enable = true;
         this.p = po;
@@ -99,10 +107,6 @@ public class GuiSelectionListener extends MouseAdapter implements ActionListener
              */
         }
 
-    }
-
-    public GElement getSelected() {
-        return guiEditor.getSelected();
     }
 
     @Override
@@ -133,6 +137,7 @@ public class GuiSelectionListener extends MouseAdapter implements ActionListener
             this.guiEditor.selectElement(e.getX(), e.getY());
             this.p.show(e.getComponent(), e.getX(), e.getY());
         }
+
         if (dragging) {
             GElement sel = this.guiEditor.getSelected();
             if (sel != null && this.selectedRect != null) {
@@ -171,6 +176,7 @@ public class GuiSelectionListener extends MouseAdapter implements ActionListener
 
         if (this.selecting) {
             this.disable();
+
             if (e.getX() > selectedRect.getMaxX() - 5 && e.getX() < selectedRect.getMaxX() + 5
                     && e.getY() > selectedRect.getMaxY() - 5
                     && e.getY() < selectedRect.getMaxY() + 5) {
@@ -194,7 +200,6 @@ public class GuiSelectionListener extends MouseAdapter implements ActionListener
                     && e.getY() > selectedRect.getCenterY() - 10 && (e.getX() < (selectedRect.getCenterX() + 10) && e.getX() > selectedRect.getCenterX() - 10)) {
                 setCursor(e.getComponent(), Cursor.MOVE_CURSOR);
                 this.enable();
-
                 curDir = NOP;
             } else {
                 setCursor(e.getComponent(), Cursor.DEFAULT_CURSOR);
@@ -203,7 +208,6 @@ public class GuiSelectionListener extends MouseAdapter implements ActionListener
         } else {
             setCursor(e.getComponent(), Cursor.DEFAULT_CURSOR);
             curDir = NOP;
-
         }
 
     }
@@ -213,30 +217,30 @@ public class GuiSelectionListener extends MouseAdapter implements ActionListener
     }
 
     public void directElementModification(MouseEvent e, String attribute) {//,int intValue,String value){
+        GElement sel = guiEditor.getSelected();
         if (attribute.equals("width")) {
-            this.guiEditor.getSelected().getNiftyElement().setWidth(selectedRect.width);
-            this.guiEditor.getSelected().addAttribute(attribute, "" + selectedRect.width + "px");
+            sel.getNiftyElement().setWidth(selectedRect.width);
+            sel.addAttribute(attribute, "" + selectedRect.width + "px");
         } else if (attribute.equals("height")) {
-
-            this.guiEditor.getSelected().getNiftyElement().setHeight(selectedRect.height);
-            this.guiEditor.getSelected().addAttribute("height", "" + selectedRect.height + "px");
+            sel.getNiftyElement().setHeight(selectedRect.height);
+            sel.addAttribute("height", "" + selectedRect.height + "px");
         } else if (attribute.equals("widthx")) {
-            this.guiEditor.getSelected().addAttribute("width", "" + selectedRect.width + "px");
-            if (this.guiEditor.getSelected().getParent().getAttribute("childLayout").equals("absolute")) {
-                int x = guiEditor.getSelected().getParent().getNiftyElement().getX();
-                this.guiEditor.getSelected().addAttribute("x", "" + (e.getX() - x) + "px");
+            sel.addAttribute("width", "" + selectedRect.width + "px");
+            if (sel.getParent().getAttribute("childLayout").equals("absolute")) {
+                int x = sel.getParent().getNiftyElement().getX();
+                sel.addAttribute("x", "" + (e.getX() - x) + "px");
             }
         } else if (attribute.equals("widthheight")) {
 
-            this.guiEditor.getSelected().getNiftyElement().setHeight(selectedRect.height);
-            this.guiEditor.getSelected().addAttribute("height", "" + selectedRect.height + "px");
-            this.guiEditor.getSelected().getNiftyElement().setWidth(selectedRect.width);
-            this.guiEditor.getSelected().addAttribute("width", "" + selectedRect.width + "px");
+            sel.getNiftyElement().setHeight(selectedRect.height);
+            sel.addAttribute("height", "" + selectedRect.height + "px");
+            sel.getNiftyElement().setWidth(selectedRect.width);
+            sel.addAttribute("width", "" + selectedRect.width + "px");
         } else if (attribute.equals("heighty")) {
-            this.guiEditor.getSelected().addAttribute("height", "" + selectedRect.height + "px");
-            if (this.guiEditor.getSelected().getParent().getAttribute("childLayout").equals("absolute")) {
-                int y = guiEditor.getSelected().getParent().getNiftyElement().getY();
-                this.guiEditor.getSelected().addAttribute("y", "" + (e.getY() - y) + "px");
+            sel.addAttribute("height", "" + selectedRect.height + "px");
+            if (sel.getParent().getAttribute("childLayout").equals("absolute")) {
+                int y = sel.getParent().getNiftyElement().getY();
+                sel.addAttribute("y", "" + (e.getY() - y) + "px");
             }
         }
     }
@@ -246,6 +250,9 @@ public class GuiSelectionListener extends MouseAdapter implements ActionListener
         if (this.selecting) {
             int to;
             this.dragging = true;
+
+            //suggest and snap
+            collectSuggestionValues();
             switch (curDir) {
                 case DIR_E:
                     to = (int) (e.getX() - this.selectedRect.getMaxX());
@@ -314,13 +321,12 @@ public class GuiSelectionListener extends MouseAdapter implements ActionListener
     @Override
     public void update(Observable o, Object arg) {
         SimpleNiftyEditorEvent act = (SimpleNiftyEditorEvent) arg;
-        if (act.getType() == SimpleNiftyEditorEvent.SEL && !act.getGUIElement().getType().equals(Types.LAYER)) {
+        if (act.getType() == SimpleNiftyEditorEvent.SEL && !act.getGUIElement().getType().equals(GUITypes.LAYER)) {
             this.selectedRect.setBounds(act.getGUIElement().getBounds());
             this.selecting = true;
         } else if (act.getType() == SimpleNiftyEditorEvent.NEW) {
             this.guiEditor = (((GUIEditor) o));
             this.selecting = false;
-
         } else {
             this.selecting = false;
         }
@@ -460,6 +466,26 @@ public class GuiSelectionListener extends MouseAdapter implements ActionListener
      }
      }
      */
+    public void collectSuggestionValues() {
+        GElement sel = guiEditor.getSelected();
+        AbstractGUI gui = guiEditor.getGui();
+        suggestedValue.clear();
+        for (GScreen screen : gui.getScreens()) {
+            for (GElement layer : screen.getElements()) {
+                for (GElement ele : gui.getAllChild(layer)) {
+                    Rectangle bounds = ele.getBounds();
+                    suggestedValue.add(bounds.x);
+                    suggestedValue.add(bounds.x + bounds.width);
+                }
+            }
+        }
+        /*
+         if (true){//sel.getAttribute("")) {
+            
+         }
+         */
+    }
+
     public void setupNetbeanSelection() {
         //You must hold a reference to your Lookup.Result as long as you are interested 
         //in changes in it, or it will be garbage collected and you will stop getting 
@@ -492,8 +518,16 @@ public class GuiSelectionListener extends MouseAdapter implements ActionListener
         });
     }
 
+    public GElement getSelected() {
+        return guiEditor.getSelected();
+    }
+
     public void selectElement(GElement el) {
         guiEditor.selectElement(el);
         Logger.getLogger(GUIEditor.class.getName()).log(Level.INFO, "Selection change ACT");
+    }
+
+    public ArrayList<Integer> getSuggestedValue() {
+        return suggestedValue;
     }
 }

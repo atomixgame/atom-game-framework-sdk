@@ -10,7 +10,6 @@ package com.jme3.gde.preview;
  */
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.beans.*;
 import java.io.File;
 
@@ -64,7 +63,7 @@ public class ImagePreviewPanel extends JPanel
         height = image.getHeight(this);
         double ratio = 1.0;
 
-        /*          * Determine how to scale the image. Since the accessory can expand
+        /* Determine how to scale the image. Since the accessory can expand
          * vertically make sure we don't go larger than 150 when scaling
          * vertically.
          */

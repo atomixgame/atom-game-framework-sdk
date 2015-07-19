@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
-OpenIDE-Module: sg.atom.visualcode
-OpenIDE-Module-Localizing-Bundle: sg/atom/visualcode/Bundle.properties
+OpenIDE-Module: sg.gde.visualcode
+OpenIDE-Module-Localizing-Bundle: sg/gde/visualcode/Bundle.properties
 OpenIDE-Module-Requires: org.openide.windows.IOProvider
 OpenIDE-Module-Specification-Version: 1.0
 

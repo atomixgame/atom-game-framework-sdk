@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-OpenIDE-Module: sg.atom.nextgen.dialogue
-OpenIDE-Module-Localizing-Bundle: sg/atom/nextgen/dialogue/Bundle.properties
-OpenIDE-Module-Specification-Version: 1.0
-

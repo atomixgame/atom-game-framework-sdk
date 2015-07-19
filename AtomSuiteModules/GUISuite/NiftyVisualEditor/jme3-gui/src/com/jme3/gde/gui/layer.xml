@@ -155,8 +155,8 @@
     <folder name="Navigator">
         <folder name="Panels">
             <folder name="text">
-                <folder name="x-niftygui+xml+nav"><!-- NavigatorPanel implementation, replace with your own -->
-                    <file name="com.jme3.gde.gui.explorer.NiftyNavPanelImpl.instance"/>
+                <folder name="x-niftygui+xml+nav">
+                    <file name="com.jme3.gde.gui.services.niftygui.explorer.NiftyNavPanelImpl.instance"/>
                    <!-- <file name="com.jme3.gde.gui.explorer.NiftyNavPanelImpl.instance_hidden"/> -->
                 </folder>
             </folder>

@@ -34,3 +34,24 @@ nb-configuration.xml
 # Misc #
 /AtomSuiteModules/NextGenSuite/MMORPGSupport/nbproject/private/
 /AtomSuiteModules/Core/ClientServer/nbproject/private/
+/AtomSuiteModules/ComposerSuite/AtomCinematicEditor/build/
+/AtomSuiteModules/VisualCodeSuite/AtomCodeConvertor/nbproject/private/
+/AtomSuiteModules/RPGSuite/DialogueCreator/build/
+/AtomSuiteModules/RPGSuite/RPGSuite/nbproject/private/
+/AtomSuiteModules/RPGSuite/FacialTool/nbproject/private/
+/AtomSuiteModules/RPGSuite/RPGSuite/build/
+/AtomSuiteModules/RPGSuite/RPGCharaterManager/build/
+/AtomSuiteModules/VisualCodeSuite/VisualCode/build/
+/AtomSuiteModules/VisualCodeSuite/FlowGraph/build/
+/AtomSuiteModules/ComposerSuite/SpriteEditor/nbproject/private/
+/AtomSuiteModules/ComposerSuite/SpriteEditor/build/
+/AtomSuiteModules/ComposerSuite/AtomSwingTimeline/nbproject/private/
+/AtomSuiteModules/ScriptingSuite/ScriptManager/build/
+/AtomSuiteModules/ScriptingSuite/Groovy2Libs/build/
+/AtomSuiteModules/ScriptingSuite/ScriptingSuite/nbproject/private/
+/AtomSuiteModules/ScriptingSuite/Groovy2Libs/nbproject/private/
+/AtomSuiteModules/ScriptingSuite/ScriptingSuite/build/
+/AtomSuiteModules/ScriptingSuite/AtomScriptingLib/build/
+/AtomSuiteModules/ComposerSuite/ComposerSuite/nbproject/private/
+/AtomSuiteModules/ComposerSuite/AudioComposer/build/
+/AtomSuiteModules/ComposerSuite/AudioComposer/dist/

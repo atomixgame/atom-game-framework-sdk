@@ -24,7 +24,7 @@ import sun.swing.SwingUtilities2;
  * Top component which displays something.
  */
 @ConvertAsProperties(
-    dtd = "-//com.jme3.gde.welcome//WelcomeScreen//EN",
+    dtd = "-//sg.gde.atomcore.welcome//WelcomeScreen//EN",
 autostore = false)
 @TopComponent.Description(
     preferredID = "WelcomeScreenTopComponent",

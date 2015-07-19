@@ -1,6 +1,5 @@
 package de.jaret.timebars.pdi;
 
-import sg.atom.timeline.model.cine.TimeLineTrackRow;
 import de.jaret.util.ui.timebars.model.TimeBarRowHeader;
 import de.jaret.util.ui.timebars.swing.TimeBarViewer;
 import de.jaret.util.ui.timebars.swing.renderer.HeaderRenderer;
@@ -9,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import sg.atom.corex.extimeline.model.TimeLineTrackChannel;
 
 /**
  * @author Peter Kliem
@@ -21,7 +21,7 @@ public class TrackHeaderRenderer implements HeaderRenderer {
     @Override
     public JComponent getHeaderRendererComponent(TimeBarViewer tbv, TimeBarRowHeader value, boolean isSelected) {
         if (value != null) {
-            _component.setText(((TimeLineTrackRow) value).getName());
+            _component.setText(((TimeLineTrackChannel) value).getName());
         } else {
             _component.setText("No name");
         }
@@ -32,17 +32,15 @@ public class TrackHeaderRenderer implements HeaderRenderer {
         } else {
             _component.setBackground(Color.WHITE);
         }
-        
-        _component.addMouseListener(new MouseAdapter() {
 
+        _component.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 System.out.println(" Clicked !");
             }
-            
         });
-        
+
         //_component.
         return _component;
     }

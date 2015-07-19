@@ -1,4 +1,4 @@
-package com.jme3.gde.welcome.rss;
+package sg.gde.atomcore.welcome.rss;
 
 /**
  *

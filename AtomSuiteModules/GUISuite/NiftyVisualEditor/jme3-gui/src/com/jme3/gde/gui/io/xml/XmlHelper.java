@@ -2,17 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.jme3.gde.gui.io.xml;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
- *
+ * DOM XML Helper.
  * @author normenhansen
  */
 public class XmlHelper {
+
     public static Element findFirstChildElement(Element parent) {
         org.w3c.dom.Node ret = parent.getFirstChild();
         while (ret != null && (!(ret instanceof Element))) {
@@ -45,7 +45,7 @@ public class XmlHelper {
             return null;
         }
         org.w3c.dom.Node ret = parent.getFirstChild();
-        while (ret != null && (!(ret instanceof Element) || !ret.getNodeName().equals(name) || ((Element)ret).getAttribute(attribute)==null || !((Element)ret).getAttribute(attribute).equals(value))) {
+        while (ret != null && (!(ret instanceof Element) || !ret.getNodeName().equals(name) || ((Element) ret).getAttribute(attribute) == null || !((Element) ret).getAttribute(attribute).equals(value))) {
             ret = ret.getNextSibling();
         }
         return (Element) ret;
@@ -53,7 +53,7 @@ public class XmlHelper {
 
     public static Element findNextElementWithAttribute(Node ret, String name, String attribute, String value) {
         ret = ret.getNextSibling();
-        while (ret != null && (!(ret instanceof Element) || !ret.getNodeName().equals(name) || ((Element)ret).getAttribute(attribute)==null || !((Element)ret).getAttribute(attribute).equals(value))) {
+        while (ret != null && (!(ret instanceof Element) || !ret.getNodeName().equals(name) || ((Element) ret).getAttribute(attribute) == null || !((Element) ret).getAttribute(attribute).equals(value))) {
             ret = ret.getNextSibling();
         }
         return (Element) ret;
@@ -69,5 +69,4 @@ public class XmlHelper {
         }
         return null;
     }
-
 }

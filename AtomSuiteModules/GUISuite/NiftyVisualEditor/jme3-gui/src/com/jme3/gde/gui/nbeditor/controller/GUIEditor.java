@@ -14,21 +14,21 @@
  */
 package com.jme3.gde.gui.nbeditor.controller;
 
+import com.jme3.gde.gui.base.model.AbstractGUI;
 import com.jme3.gde.gui.io.saveload.GUIReader;
 import com.jme3.gde.gui.io.saveload.GUIWriter;
-import com.jme3.gde.gui.multiview.java2d.J2DNiftyView;
-import com.jme3.gde.gui.multiview.java2d.J2DNiftyViewContainer;
-import com.jme3.gde.gui.nbeditor.controller.selection.GuiSelectionListener;
-import com.jme3.gde.gui.nbeditor.event.SimpleNiftyEditorEvent;
-import com.jme3.gde.gui.nbeditor.model.GUI;
-import com.jme3.gde.gui.nbeditor.model.GUIFactory;
-import com.jme3.gde.gui.nbeditor.model.Types;
-import com.jme3.gde.gui.nbeditor.model.elements.GElement;
-import com.jme3.gde.gui.nbeditor.model.elements.GLayer;
-import com.jme3.gde.gui.nbeditor.model.elements.GScreen;
-import com.jme3.gde.gui.nbeditor.model.exception.IllegalDropException;
-import com.jme3.gde.gui.nbeditor.model.exception.NoProductException;
-import com.jme3.gde.gui.nbeditor.nodes.NiftyDocNode;
+import com.jme3.gde.gui.services.niftygui.java2d.J2DNiftyView;
+import com.jme3.gde.gui.services.niftygui.java2d.J2DNiftyViewContainer;
+import com.jme3.gde.gui.nbeditor.controller.selection.GUISelectionListener;
+import com.jme3.gde.gui.services.niftygui.events.SimpleNiftyEditorEvent;
+import com.jme3.gde.gui.base.model.GUITypes;
+import com.jme3.gde.gui.base.model.elements.GElement;
+import com.jme3.gde.gui.base.model.elements.GLayer;
+import com.jme3.gde.gui.base.model.elements.GScreen;
+import com.jme3.gde.gui.nbeditor.exception.IllegalDropException;
+import com.jme3.gde.gui.base.model.exception.NoProductException;
+import com.jme3.gde.gui.services.niftygui.NiftyGUIFactory;
+import com.jme3.gde.gui.services.niftygui.nodes.NiftyDocNode;
 import de.lessvoid.nifty.Nifty;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -52,9 +52,15 @@ import org.openide.util.lookup.InstanceContent;
 import org.xml.sax.SAXException;
 
 /**
- * Editor controller provides a list of method to interact with
+ * Editor controller provides a list of method to interact with GUI.
  *
- * Deal with GTree and Netbean's Node elements
+ * <p>Deal with GTree and Netbean's Node elements. Synchronization automaticly.
+ *
+ * <p>Provide travel methods
+ *
+ * <p>Create element via script.
+ *
+ * <p>Manage mapping between instance element - original element - styles.
  *
  * @see GUI and its elements.
  * @author Cris
@@ -62,28 +68,28 @@ import org.xml.sax.SAXException;
 public class GUIEditor extends Observable {
     /* GTree elements */
 
-    private GUI gui;
-    private GElement selectedElement;
+    private AbstractGUI gui;
+    private GUIWriter writer;
+    private ElementEditor elementEditor;
+    // Working layer and screen
     private LinkedList<GLayer> currentLayers;
     private GScreen currentS;
     private GLayer currentL;
-    private GUIWriter writer;
-    private ElementEditor eEditor;
     /* Netbean Nodes elements */
-    private NiftyDocNode rootContext;
     
     private InstanceContent content;
-    
     /* Manage reander thread and operations */
     private Thread renderThread;
+    private NiftyDocNode rootContext;
     private J2DNiftyViewContainer viewContainer;
     private String defaultFilePath = "com/jme3/gde/gui/resources/xml/empty.xml";
     // Selection
-    private GuiSelectionListener guiSelectionListener;
+    private GElement selectedElement;
+    private GUISelectionListener guiSelectionListener;
 
     public GUIEditor() {
         currentLayers = new LinkedList<GLayer>();
-        eEditor = new ElementEditor(null);
+        elementEditor = new ElementEditor(null);
     }
 
     /**
@@ -95,9 +101,9 @@ public class GUIEditor extends Observable {
      * valid document instance
      */
     public void createNewGui(Nifty nifty) throws ParserConfigurationException {
-        gui = GUIFactory.getInstance().createGUI(nifty);
+        gui = NiftyGUIFactory.getInstance().createGUI(nifty);
 
-        GScreen screen = (GScreen) GUIFactory.getInstance().newGElement("" + Types.SCREEN);
+        GScreen screen = (GScreen) NiftyGUIFactory.getInstance().newGElement("" + GUITypes.SCREEN);
         getGui().addScreen(screen);
 
         this.currentS = screen;
@@ -122,7 +128,7 @@ public class GUIEditor extends Observable {
      *
      */
     public String createNewGui(Nifty nifty, File filename) throws ParserConfigurationException, IOException, SAXException, NoProductException, Exception {
-        GUIReader reader = new GUIReader(nifty);
+        GUIReader reader = new GUIReader(NiftyGUIFactory.getInstance());
         String res = "";
 
         // Load the XML file and report errors
@@ -139,7 +145,6 @@ public class GUIEditor extends Observable {
          }
          */
         nifty.fromXml("" + this.getGui(), writer.getDocumentStream(), screen.getID());
-
 
         reloadAfterFresh();
 
@@ -208,8 +213,8 @@ public class GUIEditor extends Observable {
      * @param targetElement GElement to select
      */
     public void selectElement(GElement targetElement) {
-        
-        if (targetElement.getType().equals(Types.SCREEN)) {
+
+        if (targetElement.getType().equals(GUITypes.SCREEN)) {
             if (this.currentS != targetElement) {
                 this.currentS = (GScreen) targetElement;
                 this.currentLayers.clear();
@@ -222,12 +227,12 @@ public class GUIEditor extends Observable {
                 this.getGui().goTo(currentS);
             }
 
-        } else if (targetElement.getType().equals(Types.LAYER)) {
+        } else if (targetElement.getType().equals(GUITypes.LAYER)) {
             this.currentL = (GLayer) targetElement;
         }
 
         this.selectedElement = targetElement;
-        
+
         this.setChanged();
         this.notifyObservers(new SimpleNiftyEditorEvent(SimpleNiftyEditorEvent.SEL, targetElement));
         this.clearChanged();
@@ -267,7 +272,7 @@ public class GUIEditor extends Observable {
      *
      */
     public void addElement(GElement e, Point2D mouse) {
-        if (e.getType().equals(Types.SCREEN)) {
+        if (e.getType().equals(GUITypes.SCREEN)) {
             this.currentS = (GScreen) e;
             this.currentLayers.clear();
             for (GElement lay : currentS.getElements()) {
@@ -275,7 +280,7 @@ public class GUIEditor extends Observable {
             }
             this.getGui().addScreen(currentS);
             this.getGui().goTo(currentS);
-        } else if (e.getType().equals(Types.LAYER)) {
+        } else if (e.getType().equals(GUITypes.LAYER)) {
             Logger.getLogger(GUIEditor.class.getName()).log(Level.INFO, "It's Layer");
             if (this.currentS != null) {
                 this.getGui().addElement(e, this.currentS);
@@ -326,12 +331,12 @@ public class GUIEditor extends Observable {
         rootContext.refresh();
     }
 
-    public void addElement(Types t) {
+    public void addElement(GUITypes t) {
         addElement(t, new Point(0, 0));
     }
 
-    public void addElement(Types t, Point2D mouse) {
-        GElement newGElement = GUIFactory.getInstance().newGElement(t);
+    public void addElement(GUITypes t, Point2D mouse) {
+        GElement newGElement = NiftyGUIFactory.getInstance().newGElement(t);
         this.addElement(newGElement, mouse);
     }
 
@@ -356,13 +361,13 @@ public class GUIEditor extends Observable {
     }
 
     public ElementEditor getElementEditor() {
-        eEditor.setEdited(selectedElement);
-        return eEditor;
+        elementEditor.setEdited(selectedElement);
+        return elementEditor;
     }
 
     public ElementEditor getElementEditor(GElement toEdit) {
-        eEditor.setEdited(toEdit);
-        return eEditor;
+        elementEditor.setEdited(toEdit);
+        return elementEditor;
     }
 
     /**
@@ -372,7 +377,7 @@ public class GUIEditor extends Observable {
      * @param from
      */
     public void move(Point2D to, GElement from) {
-        if (from.getType().equals("" + Types.LAYER)) {
+        if (from.getType().equals("" + GUITypes.LAYER)) {
             return;
         }
         GElement ele = findElement(to);
@@ -389,7 +394,7 @@ public class GUIEditor extends Observable {
     /**
      * @return the gui
      */
-    public GUI getGui() {
+    public AbstractGUI getGui() {
         return gui;
     }
 
@@ -401,7 +406,7 @@ public class GUIEditor extends Observable {
      */
     public GElement findElement(Point2D point) {
         LinkedList<GElement> res = new LinkedList<GElement>();
-        
+
         for (GElement ele : this.gui.getAllChild(currentL)) {
             if (ele.contains(point)) {
                 res.add(ele);
@@ -436,7 +441,7 @@ public class GUIEditor extends Observable {
     public Node getRootContext() {
         return rootContext;
     }
-    
+
     /*
      public void loadNodes(NiftyGuiDataObject niftyObject) {
         
@@ -465,10 +470,9 @@ public class GUIEditor extends Observable {
      }
      }
      */
-
-    public void loadNodes(GUI gui) {
+    public void loadNodes(AbstractGUI gui) {
         //FIXME: Determinate real rootNode
-        rootContext = new NiftyDocNode(gui);
+        //rootContext = new NiftyDocNode(gui);
 
     }
 
@@ -540,20 +544,20 @@ public class GUIEditor extends Observable {
 
     }
 
-    public void setNiftyDebug(boolean b) {
-        gui.getNifty().setDebugOptionPanelColors(b);
-    }
-
-    public void toogleNiftyDebug() {
-        gui.getNifty().setDebugOptionPanelColors(!gui.getNifty().isDebugOptionPanelColors());
-
-        //FIXME: Remove this debug 
-        // Dumb nifty tree
-
-        // Dumb GTree
-
-        // Dumb 
-    }
+//    public void setNiftyDebug(boolean b) {
+//        gui.getNifty().setDebugOptionPanelColors(b);
+//    }
+//
+//    public void toogleNiftyDebug() {
+//        gui.getNifty().setDebugOptionPanelColors(!gui.getNifty().isDebugOptionPanelColors());
+//
+//        //FIXME: Remove this debug 
+//        // Dumb nifty tree
+//
+//        // Dumb GTree
+//
+//        // Dumb 
+//    }
 
     /* Thread management */
     public void startRenderThread() {
@@ -586,8 +590,7 @@ public class GUIEditor extends Observable {
     }
 
     // SETTER & GETTER
-
-    public GuiSelectionListener getGuiSelectionListener() {
+    public GUISelectionListener getGuiSelectionListener() {
         return guiSelectionListener;
     }
 
@@ -604,6 +607,6 @@ public class GUIEditor extends Observable {
     }
 
     public void bindSelectionView(J2DNiftyView view, JPopupMenu popUp) {
-        guiSelectionListener = new GuiSelectionListener(this, popUp, view);
+        guiSelectionListener = new GUISelectionListener(this, popUp, view);
     }
 }

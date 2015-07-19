@@ -14,12 +14,12 @@
  */
 package com.jme3.gde.gui.nbeditor.controller.dnd;
 
-import com.jme3.gde.gui.multiview.java2d.J2DNiftyView;
+import com.jme3.gde.gui.services.niftygui.java2d.J2DNiftyView;
 import com.jme3.gde.gui.nbeditor.controller.GUIEditor;
-import com.jme3.gde.gui.nbeditor.event.SimpleNiftyEditorEvent;
-import com.jme3.gde.gui.nbeditor.model.Types;
-import com.jme3.gde.gui.nbeditor.model.elements.GElement;
-import com.jme3.gde.gui.palette.visual.dnd.WidgetData;
+import com.jme3.gde.gui.services.niftygui.events.SimpleNiftyEditorEvent;
+import com.jme3.gde.gui.base.model.GUITypes;
+import com.jme3.gde.gui.base.model.elements.GElement;
+import com.jme3.gde.gui.palette.nifty.visual.dnd.WidgetData;
 import java.awt.Rectangle;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -79,7 +79,7 @@ public class TransferHandling extends TransferHandler implements Observer {
 
         try {
             GElement ele = (GElement) support.getTransferable().getTransferData(WidgetData.FLAVOR);
-            if (ele.getType().equals("" + Types.LAYER)) {
+            if (ele.getType().equals("" + GUITypes.LAYER)) {
                 return false;
             }
         } catch (UnsupportedFlavorException ex) {

@@ -1,8 +1,5 @@
 package de.jaret.timebars.pdi;
 
-import sg.atom.timeline.model.cine.CinematicModel;
-import sg.atom.timeline.model.cine.MainTrack;
-import sg.atom.timeline.model.cine.TimeLineTrackRow;
 import de.jaret.util.date.JaretDate;
 import de.jaret.util.ui.timebars.TimeBarMarkerImpl;
 import de.jaret.util.ui.timebars.swing.TimeBarViewer;
@@ -11,16 +8,17 @@ import de.jaret.util.ui.timebars.swing.renderer.DefaultTitleRenderer;
 import java.awt.BorderLayout;
 import java.util.Random;
 import javax.swing.JFrame;
+import sg.atom.swing.components.jaret.JaretCinematicModel;
+import sg.atom.swing.components.jaret.JaretMainTrack;
+import sg.atom.swing.components.jaret.JaretTimeLineTrackRow;
 
 /**
- * @author Peter Kliem
- * @version $Id: PdiExample.java 426 2007-05-13 15:41:49Z olk $
  */
 public class DualTimeline extends JFrame {
 
     Random RND = new Random();
-    CinematicModel cinematicModel;
-    CinematicModel cinematicModel2;
+    JaretCinematicModel cinematicModel;
+    JaretCinematicModel cinematicModel2;
     static String[] mainTrackNames = {"Director", "Cam", "CameraEffect", "Sound", "Effect"};
     static String[] evenTrackNames = {"Cam1", "Cam2", "Car", "MainCharacter", "Background", "Particles"};
 
@@ -29,10 +27,10 @@ public class DualTimeline extends JFrame {
         setSize(1200, 700);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new BorderLayout());
-        cinematicModel = new CinematicModel();
+        cinematicModel = new JaretCinematicModel();
         createModels(cinematicModel);
 
-        cinematicModel2 = new CinematicModel();
+        cinematicModel2 = new JaretCinematicModel();
         createModels(cinematicModel2);
 
         TimeBarViewer tbv = new TimeBarViewer(cinematicModel, false, false);
@@ -116,12 +114,12 @@ public class DualTimeline extends JFrame {
     /**
      *
      */
-    private void createModels(CinematicModel cinematicModel) {
+    private void createModels(JaretCinematicModel cinematicModel) {
         for (int i = 0; i < mainTrackNames.length; i++) {
-            TimeLineTrackRow row = new TimeLineTrackRow(mainTrackNames[i]);
+            JaretTimeLineTrackRow row = new JaretTimeLineTrackRow(mainTrackNames[i]);
             int numOfTracks = 2 + RND.nextInt(8);
             for (int j = 0; j < numOfTracks; j++) {
-                MainTrack mainTrack = new MainTrack("Track " + i + " " + j);
+                JaretMainTrack mainTrack = new JaretMainTrack("Track " + i + " " + j);
                 JaretDate start = new JaretDate(0).advanceSeconds(5 * (1 + j));
                 mainTrack.setBegin(start);
                 //mainTrack.setEnd(start.copy().advanceSeconds(RND.nextInt(15 * (1+j))));

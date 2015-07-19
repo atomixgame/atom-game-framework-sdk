@@ -26,9 +26,6 @@ import java.util.List;
 
 
 
-import sg.atom.timeline.model.cine.DataPoint;
-import sg.atom.timeline.model.cine.LineChartInterval;
-import sg.atom.timeline.model.cine.creator.DataPointModelCreator;
 import de.jaret.util.date.Interval;
 import de.jaret.util.ui.timebars.swing.renderer.TimeBarRenderer;
 import java.awt.BasicStroke;
@@ -40,10 +37,13 @@ import java.awt.Rectangle;
 import java.awt.Stroke;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JComponent;
+import sg.atom.swing.components.jaret.JaretDataPoint;
+import sg.atom.swing.components.jaret.JaretLineChartInterval;
+import sg.atom.swing.components.jaret.creator.JaretDataPointModelCreator;
 
 /**
- * renderer rendering a line chart in a LineChartInterval.
- * 
+ * renderer rendering a line chart in a JaretLineChartInterval.
+ *
  * @author Peter Kliem
  * @version $Id: LineChartRenderer.java 766 2008-05-28 21:36:48Z kliem $
  */
@@ -53,7 +53,7 @@ public class LineChartRenderer implements TimeBarRenderer {
 
     /**
      * Construct renderer for screen use.
-     * 
+     *
      */
     public LineChartRenderer() {
     }
@@ -87,7 +87,6 @@ public class LineChartRenderer implements TimeBarRenderer {
             setLayout(null);
             setOpaque(false);
             addMouseMotionListener(new MouseMotionAdapter() {
-
                 @Override
                 public void mouseMoved(MouseEvent e) {
                     super.mouseMoved(e);
@@ -142,16 +141,16 @@ public class LineChartRenderer implements TimeBarRenderer {
             gc.setColor(fg);
 
             // get all points to be drawn
-            LineChartInterval lci = (LineChartInterval) interval;
+            JaretLineChartInterval lci = (JaretLineChartInterval) interval;
 
             // get the data points to draw
             // since the drawing of the connecting lines will fail due to the scroll optimization take some more points
             // on each side
-            List<DataPoint> points = lci.getDataPoints(delegate.getStartDate().copy().backHours(3), delegate.getEndDate().copy().advanceHours(3));
+            List<JaretDataPoint> points = lci.getDataPoints(delegate.getStartDate().copy().backHours(3), delegate.getEndDate().copy().advanceHours(3));
 
             Point last = null;
 
-            for (DataPoint dataPoint : points) {
+            for (JaretDataPoint dataPoint : points) {
                 int x = delegate.xForDate(dataPoint.getTime());
                 int y = yForValue(drawingArea, dataPoint.getValue());
 
@@ -198,25 +197,26 @@ public class LineChartRenderer implements TimeBarRenderer {
 
     /**
      * Calculate y value for a given value in the line chart example.
-     * 
+     *
      * @param drawingArea drawing area (of which the height is needed)
      * @param value value to project
      * @return projected y coordinate
      */
     public static int yForValue(Rectangle drawingArea, int value) {
-        double vForPix = (double) drawingArea.height / DataPointModelCreator.MAX;
+        double vForPix = (double) drawingArea.height / JaretDataPointModelCreator.MAX;
         return drawingArea.y + drawingArea.height - (int) (vForPix * value);
     }
 
     /**
-     * Calculate the value represented by an y coordinate in the line chart example.
-     * 
+     * Calculate the value represented by an y coordinate in the line chart
+     * example.
+     *
      * @param drawingArea drawing area as the base for the projection
      * @param y y coordinate
      * @return the value
      */
     public static int valueForY(Rectangle drawingArea, int y) {
-        double vForPix = (double) drawingArea.height / DataPointModelCreator.MAX;
+        double vForPix = (double) drawingArea.height / JaretDataPointModelCreator.MAX;
         int off = drawingArea.height - y;
         return (int) ((double) off / vForPix);
     }

@@ -14,7 +14,7 @@
  */
 package com.jme3.gde.gui.io.saveload;
 
-import com.jme3.gde.gui.nbeditor.model.GUI;
+import com.jme3.gde.gui.base.model.AbstractGUI;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,9 +30,10 @@ import javax.xml.transform.stream.StreamResult;
  */
 public class GUIWriter {
 
-    private final GUI gui;
+    private final AbstractGUI gui;
 
-    public GUIWriter(GUI gui) {
+//    @Inject
+    public GUIWriter(AbstractGUI gui) {
         this.gui = gui;
     }
 

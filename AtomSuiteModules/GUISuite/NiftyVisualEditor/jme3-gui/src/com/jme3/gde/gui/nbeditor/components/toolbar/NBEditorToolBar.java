@@ -23,7 +23,6 @@ public class NBEditorToolBar extends JToolBar implements ActionListener {
         this.guiEditor = guiEditor;
     }
     
-    
     protected JButton makeIconButton(String imageName,
             String actionCommand,
             String toolTipText,
