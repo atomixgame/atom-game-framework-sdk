@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module: sg.atom.gdx.ai.steering
+OpenIDE-Module-Localizing-Bundle: sg/atom/gdx/ai/steering/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

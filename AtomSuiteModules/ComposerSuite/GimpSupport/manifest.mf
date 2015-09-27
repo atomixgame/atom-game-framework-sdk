@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module: sg.atom.sdk.composer.assets.gimpsupport
+OpenIDE-Module-Localizing-Bundle: sg/atom/sdk/composer/assets/gimpsupport/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
