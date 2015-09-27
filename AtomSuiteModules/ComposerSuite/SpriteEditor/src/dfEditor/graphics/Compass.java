@@ -1,0 +1,36 @@
+/* 
+ *  Copyright 2012 Samuel Taylor
+ * 
+ *  This file is part of darkFunction Editor
+ *
+ *  darkFunction Editor is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  darkFunction Editor is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+
+ *  You should have received a copy of the GNU General Public License
+ *  along with darkFunction Editor.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package dfEditor.graphics;
+
+/**
+ *
+ * @author s4m20
+ */
+public class Compass {
+
+    public static final int NONE = (0);
+    public static final int EAST = (1 << 1);
+    public static final int WEST = (1 << 2);
+    public static final int NORTH = (1 << 3);
+    public static final int SOUTH = (1 << 4);
+    public static final int NORTH_EAST = NORTH | EAST;
+    public static final int NORTH_WEST = NORTH | WEST;
+    public static final int SOUTH_EAST = SOUTH | EAST;
+    public static final int SOUTH_WEST = SOUTH | WEST;
+}

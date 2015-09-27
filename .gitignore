@@ -55,3 +55,13 @@ nb-configuration.xml
 /AtomSuiteModules/ComposerSuite/ComposerSuite/nbproject/private/
 /AtomSuiteModules/ComposerSuite/AudioComposer/build/
 /AtomSuiteModules/ComposerSuite/AudioComposer/dist/
+/AtomSuiteModules/ComposerSuite/ComposerSuite/build/
+/AtomSuiteModules/ComposerSuite/AnimationControlTool/build/
+/AtomSuiteModules/ComposerSuite/AudioTool/build/
+/AtomSuiteModules/ComposerSuite/TimeLineEditorStandalone/nbproject/private/
+/AtomSuiteModules/ComposerSuite/AudioComposerStandalone/nbproject/private/
+/AtomSuiteModules/ComposerSuite/AudioComposerSwing/nbproject/private/
+/AtomSuiteModules/ComposerSuite/TimeLineSwingLibrary/nbproject/private/
+/AtomSuiteModules/ComposerSuite/AudioComposerLibrary/nbproject/private/
+/AtomSuiteModules/ComposerSuite/AudioComposerLibrary/build/
+/AtomSuiteModules/RPGSuite/CharacterImporter/CharacterImporter/nbproject/private/

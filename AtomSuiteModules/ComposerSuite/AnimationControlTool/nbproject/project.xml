@@ -3,7 +3,7 @@
     <type>org.netbeans.modules.apisupport.project</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/nb-module-project/3">
-            <code-name-base>org.MyTool.AnimationControlTool</code-name-base>
+            <code-name-base>sg.gde.AnimationControlTool</code-name-base>
             <suite-component/>
             <module-dependencies>
                 <dependency>
@@ -123,38 +123,6 @@
                 </dependency>
             </module-dependencies>
             <public-packages/>
-            <class-path-extension>
-                <runtime-relative-path>ext/swingx-beaninfo-1.6.3-SNAPSHOT.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/swingx-beaninfo-1.6.3-SNAPSHOT.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
-                <runtime-relative-path>ext/swingx-painters-1.6.3-SNAPSHOT.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/swingx-painters-1.6.3-SNAPSHOT.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
-                <runtime-relative-path>ext/swingx-testsupport-1.6.3-SNAPSHOT.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/swingx-testsupport-1.6.3-SNAPSHOT.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
-                <runtime-relative-path>ext/swingx-action-1.6.3-SNAPSHOT.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/swingx-action-1.6.3-SNAPSHOT.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
-                <runtime-relative-path>ext/jaretutil-0.32.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/jaretutil-0.32.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
-                <runtime-relative-path>ext/swingx-core-1.6.3-SNAPSHOT.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/swingx-core-1.6.3-SNAPSHOT.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
-                <runtime-relative-path>ext/AbsoluteLayout.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/AbsoluteLayout.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
-                <runtime-relative-path>ext/timebars-1.44.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/timebars-1.44.jar</binary-origin>
-            </class-path-extension>
         </data>
     </configuration>
 </project>

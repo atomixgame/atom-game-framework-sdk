@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<visualcode>
+    <pallete>
+        <category title="Actor">
+            <node title="Actor1"></node>
+            <node title="Actor1"></node>
+            <node title="Actor1"></node>
+            <node title="Actor1"></node>
+        </category>
+        <category title="AI">
+
+        </category>
+        <category title="Animation">
+
+        </category>          
+        <category title="Input">
+
+        </category> 
+        <category title="Logic">
+
+        </category> 
+        <category title="Math">
+
+        </category> 
+
+    </pallete>
+
+    <template>
+
+
+    </template>
+</visualcode>

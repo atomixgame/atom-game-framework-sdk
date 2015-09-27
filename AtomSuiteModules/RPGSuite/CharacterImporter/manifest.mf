@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: sg.atom.sdk.characterimporter
+OpenIDE-Module-Localizing-Bundle: sg/atom/sdk/characterimporter/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
-OpenIDE-Module: org.MyTool.AnimationControlTool
-OpenIDE-Module-Layer: org/MyTool/AnimationControlTool/layer.xml
-OpenIDE-Module-Localizing-Bundle: org/MyTool/AnimationControlTool/Bundle.properties
+OpenIDE-Module: sg.gde.AnimationControlTool
+OpenIDE-Module-Layer: sg/gde/AnimationControlTool/layer.xml
+OpenIDE-Module-Localizing-Bundle: sg/gde/AnimationControlTool/Bundle.properties
 OpenIDE-Module-Requires: org.openide.windows.WindowManager
 OpenIDE-Module-Specification-Version: 1.0
 

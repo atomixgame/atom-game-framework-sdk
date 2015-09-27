@@ -4,5 +4,4 @@ OpenIDE-Module: sg.gde.rpg
 OpenIDE-Module-Layer: sg/gde/rpg/layer.xml
 OpenIDE-Module-Localizing-Bundle: sg/gde/rpg/Bundle.properties
 OpenIDE-Module-Requires: org.openide.windows.WindowManager
-OpenIDE-Module-Specification-Version: 1.0
 

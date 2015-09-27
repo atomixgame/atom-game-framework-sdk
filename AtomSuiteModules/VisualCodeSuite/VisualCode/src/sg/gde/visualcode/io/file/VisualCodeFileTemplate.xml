@@ -1,0 +1,26 @@
+<root xmlns="visualcode">
+    <!--This is a template file for Visualcode.xml -->
+    <project>
+        <name></name>
+        <type></type>
+        <paradigm></paradigm>
+        <target></target>
+    
+        <nodes>
+            <node id="1" type="Math_Add">
+            </node>
+            <node id="2" type="Value" name="A">
+            </node>
+            <node id="3" type="Value" name="A">
+            </node>
+            <node id="4" type="Value" name="Result">
+            </node>
+        </nodes>
+        <inputs>
+        
+        </inputs>
+        <outputs>
+        
+        </outputs>
+    </project>
+</root>

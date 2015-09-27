@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module: sg.atom.gde.terrain.tile.mapeditor
+OpenIDE-Module-Localizing-Bundle: sg/atom/gde/terrain/tile/mapeditor/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

@@ -1,0 +1,74 @@
+import org.gradle.tooling.provider.model.*
+
+class DynamicGradleModelPlugin implements Plugin<Project> {
+    private final ToolingModelBuilderRegistry registry
+
+    @javax.inject.Inject
+    public DynamicGradleModelPlugin(ToolingModelBuilderRegistry registry) {
+        this.registry = registry
+    }
+
+    public void apply(Project project) {
+        def input = project.inputForDynamicGradleModelPlugin
+        def classLoader = project.classLoaderForDynamicGradleModelPlugin
+        registry.register(project.modelClassForDynamicGradleModelPlugin.newInstance(input, classLoader))
+    }
+}
+
+ClassLoader scriptClassLoader = buildscript.classLoader
+File nbBootClassPath = new File($NB_BOOT_CLASSPATH)
+ClassLoader nbBootClassLoader = classLoaderFromClassPath(Collections.singleton(nbBootClassPath), scriptClassLoader)
+
+def modelQueryInput = deserialize(new File($INPUT_FILE), nbBootClassLoader)
+
+Class modelClass = Class.forName('org.netbeans.gradle.model.internal.DynamicModelLoader', false, nbBootClassLoader)
+
+allprojects {
+    ext.modelClassForDynamicGradleModelPlugin = modelClass
+    ext.inputForDynamicGradleModelPlugin = modelQueryInput
+    ext.classLoaderForDynamicGradleModelPlugin = nbBootClassLoader
+    apply plugin: DynamicGradleModelPlugin
+}
+
+private Object deserialize(File inputFile, ClassLoader classLoader) {
+    InputStream fileInputStream = new FileInputStream(inputFile)
+    try {
+        ObjectInputStream serializedInput = new CustomClassObjectInputStream(classLoader, fileInputStream)
+        try {
+            return serializedInput.readObject()
+        } finally {
+            serializedInput.close()
+        }
+    } finally {
+        fileInputStream.close()
+    }
+}
+
+private ClassLoader classLoaderFromClassPath(Collection<File> classPath, ClassLoader parent) {
+    List<URL> urls = new ArrayList<URL>(classPath.size());
+    for (File file: classPath) {
+        urls.add(file.toURI().toURL());
+    }
+
+    return new URLClassLoader(urls.toArray(new URL[urls.size()]), parent);
+}
+
+class CustomClassObjectInputStream extends ObjectInputStream {
+    private final ClassLoader classLoader;
+
+    public CustomClassObjectInputStream(ClassLoader classLoader, InputStream input) throws IOException {
+        super(input);
+
+        this.classLoader = classLoader;
+    }
+
+    @Override
+    protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException {
+        try {
+            return Class.forName(desc.getName(), false, classLoader);
+        } catch (ClassNotFoundException ex) {
+            // Needed for primitive types
+            return super.resolveClass(desc);
+        }
+    }
+}

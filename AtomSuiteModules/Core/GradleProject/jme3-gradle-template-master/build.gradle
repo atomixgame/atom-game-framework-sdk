@@ -1,0 +1,61 @@
+defaultTasks 'build', 'runJar'
+
+version = 0.1
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+apply plugin: 'application'
+mainClassName = 'mygame.Main'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'src/resources'
+        }
+    }
+}
+
+dependencies {
+  compile fileTree(dir: 'libs', include: '*.jar')
+}
+
+//Generate self-distributing Gradle wrapper - BTW, simple task definition
+task('wrapper', type: Wrapper).configure {
+  gradleVersion = '1.10'
+}
+
+wrapper.description = "Creates a project-installed distribution of the specified Gradle runtime version (gradlew)."
+
+def versionCompatibility = 1.6
+
+jar {
+    from(configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }) {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
+
+    manifest {
+        attributes 'Implementation-Title': project.name,
+                'Implementation-Version': version,
+                'Built-By': System.getProperty('user.name'),
+                'Built-Date': new Date(),
+                'Built-JDK': System.getProperty('java.version'),
+                'Main-Class': mainClassName
+    }
+}
+
+task runJar(dependsOn:[build]) << {
+  ant.java(jar: jar.archivePath ,fork:true)
+}
+
+runJar.description = "Executes the bundled Jar artifact, equivalent to 'java -jar <executable>.jar'."

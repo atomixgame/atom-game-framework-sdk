@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    <xs:element name="project" type="project"/>
+    <xs:element name="simulation"/>
+    <xs:complexType name="project">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="type" type="xs:string"></xs:element>
+            <xs:element name="paradigm" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

@@ -212,10 +212,11 @@
                 </dependency>
             </module-dependencies>
             <public-packages>
-                <package>sg.gde.rpg</package>
                 <package>sg.gde.rpg.gamebase</package>
-                <package>sg.gde.rpg.modules.search</package>
-                <package>sg.gde.rpg.modules.wizard.character</package>
+                <package>sg.gde.rpg.gamebase.character</package>
+                <package>sg.gde.rpg.gamebase.model3d</package>
+                <package>sg.gde.rpg.gamebase.relationship</package>
+                <package>sg.gde.rpg.gamebase.story.dialogue</package>
             </public-packages>
             <class-path-extension>
                 <runtime-relative-path>ext/guava-16.0.1.jar</runtime-relative-path>
